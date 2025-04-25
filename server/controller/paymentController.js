@@ -21,7 +21,7 @@ export const paymentCreate = async (req, res) => {
       {
         mode: '0011',
         payerReference: ' ',
-        callbackURL: 'http://localhost:5000/api/bkash/payment/callback',
+        callbackURL: `${process.env.backendUrl}/api/bkash/payment/callback`,
         amount,
         currency: 'BDT',
         intent: 'sale',
@@ -41,7 +41,7 @@ export const paymentCallback = async (req, res) => {
   const { paymentID, status } = req.query;
 
   if (status === 'cancel' || status === 'failure') {
-    return res.redirect(`http://localhost:5173/error?message=${status}`);
+    return res.redirect(`${process.env.frontendUrl}/error?message=${status}`);
   }
 
   if (status === 'success') {
@@ -67,7 +67,7 @@ export const paymentCallback = async (req, res) => {
 
 // Refund payment without MongoDB, now using transaction data from request
 export const refundPayment = async (req, res) => {
-  const { trxID, paymentID, amount } = req.body; 
+  const { trxID, paymentID, amount } = req.body;
 
   if (!trxID || !paymentID || !amount) {
     return res.status(400).json({ error: 'Missing required transaction data' });
