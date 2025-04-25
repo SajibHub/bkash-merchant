@@ -1,6 +1,7 @@
 import axios from 'axios';
-import globals from 'node-global-storage';
 import { v4 as uuidv4 } from 'uuid';
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Function to get bKash headers with id_token and app key
 const getBkashHeaders = async (bkashToekn) => ({
