@@ -54,12 +54,12 @@ export const paymentCallback = async (req, res) => {
       const { data } = response;
 
       if (data?.statusCode === '0000') {
-        return res.redirect(`http://localhost:5173/success`);
+        return res.redirect(`${process.env.frontendUrl}/success`);
       } else {
-        return res.redirect(`http://localhost:5173/error?message=${data.statusMessage}`);
+        return res.redirect(`${process.env.frontendUrl}/error?message=${data.statusMessage}`);
       }
     } catch (error) {
-      return res.redirect(`http://localhost:5173/error?message=${error.message}`);
+      return res.redirect(`${process.env.frontendUrl}/error?message=${error.message}`);
     }
   }
 };
