@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from "axios"
-import '../App.css'; // Import the CSS file
+import '../App.css'; 
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
-  const [amount, setAmount] = useState('1.00'); // Default as string for controlled input
-  const [error, setError] = useState(null); // Add error state
+  const [amount, setAmount] = useState('1.00'); 
+  const [error, setError] = useState(null); 
 
   const pay = async () => {
     setLoading(true);
-    setError(null); // Clear previous errors
+    setError(null); 
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/bkash/payment/create`,
@@ -40,7 +40,7 @@ const Home = () => {
               const value = e.target.value;
               if (/^\d*(\.\d{0,2})?$/.test(value) || value === '') {
                 setAmount(value);
-                setError(null); // Clear error on valid input
+                setError(null);
               }
             }}
             onBlur={() => {
@@ -55,7 +55,7 @@ const Home = () => {
             }}
             disabled={loading}
             required
-            step="0.01" // Allow decimal values
+            step="0.01" 
             aria-describedby="amount-error"
           />
           {error && (
@@ -69,7 +69,7 @@ const Home = () => {
             disabled={loading}
             aria-busy={loading}
           >
-            {loading ? 'Processing...' : `Pay ৳${parseFloat(amount).toFixed(2)}`}
+            {loading ? 'Processing...' : `Pay ৳${amount}`}
           </button>
         </form>
       </div>

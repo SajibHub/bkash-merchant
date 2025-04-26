@@ -3,8 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 
 const Success = () => {
   const [searchParams] = useSearchParams();
-  const paymentId = searchParams.get('paymentId');
-  const trxId = searchParams.get('trxId');
+  const paymentId = searchParams.get('paymentID');
+  const trxId = searchParams.get('trxID');
   const amount = searchParams.get('amount');
 
   return (
@@ -30,15 +30,16 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    background: '#e6ffed',
+    background: '#000', // Black background
   },
   card: {
-    background: '#fff',
+    background: '#333', // Dark gray card background
     padding: '30px',
     borderRadius: '12px',
     textAlign: 'center',
-    boxShadow: '0 10px 20px rgba(0, 0, 0, 0.1)',
+    boxShadow: '0 10px 20px rgba(0, 0, 0, 0.5)',
     width: '320px',
+    color: '#fff', // White text
   },
   title: {
     fontSize: '1.8rem',
@@ -47,7 +48,7 @@ const styles = {
   },
   subtitle: {
     fontSize: '1rem',
-    color: '#333',
+    color: '#fff', // White text
     marginBottom: '20px',
   },
   button: {
