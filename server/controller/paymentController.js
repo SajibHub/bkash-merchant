@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import dotenv from 'dotenv';
+import dotenv, { parse } from 'dotenv';
 dotenv.config();
 
 // Function to get bKash headers with id_token and app key
@@ -14,7 +14,6 @@ const getBkashHeaders = async (bkashToekn) => ({
 // Payment creation
 export const paymentCreate = async (req, res) => {
   const { amount } = req.body;
-
   try {
     const response = await axios.post(
       process.env.bkash_create_payment_url,
@@ -22,10 +21,10 @@ export const paymentCreate = async (req, res) => {
         mode: '0011',
         payerReference: ' ',
         callbackURL: `${process.env.backendUrl}/api/bkash/payment/callback`,
-        amount,
+        amount: Number(amount).toFixed(2),
         currency: 'BDT',
         intent: 'sale',
-        merchantInvoiceNumber: 'Inv' + uuidv4().substring(0, 5),
+        merchantInvoiceNumber: Math.floor(Math.random() * 1000000),
       },
       { headers: await getBkashHeaders(req.headers.bkashToekn) }
     );
@@ -55,7 +54,7 @@ export const paymentCallback = async (req, res) => {
       const { data } = response;
 
       if (data?.statusCode === '0000') {
-        return res.redirect(`${process.env.frontendUrl}/success`);
+        return res.redirect(`${process.env.frontendUrl}/success?paymentID=${data.paymentID}&trxID=${data.trxID}&amount=${data.amount}`);
       } else {
         return res.redirect(`${process.env.frontendUrl}/error?message=${data.statusMessage}`);
       }

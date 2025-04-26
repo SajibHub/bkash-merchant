@@ -1,8 +1,9 @@
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 const Error = () => {
-  const searchData = new URLSearchParams(window.location.search);
-  const message = searchData.get('message') || 'Something went wrong.';
+  const [searchParams] = useSearchParams();
+  const message = searchParams.get('message');
 
   return (
     <div style={styles.container}>

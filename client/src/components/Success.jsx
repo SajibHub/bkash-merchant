@@ -1,11 +1,20 @@
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 const Success = () => {
+  const [searchParams] = useSearchParams();
+  const paymentId = searchParams.get('paymentId');
+  const trxId = searchParams.get('trxId');
+  const amount = searchParams.get('amount');
+
   return (
     <div style={styles.container}>
       <div style={styles.card}>
         <h1 style={styles.title}>✅ Payment Successful!</h1>
         <p style={styles.subtitle}>Thank you for your payment. Your transaction was completed successfully.</p>
+        <p><strong>Payment ID:</strong> {paymentId || 'N/A'}</p>
+        <p><strong>Transaction ID:</strong> {trxId || 'N/A'}</p>
+        <p><strong>Amount:</strong> {amount || 'N/A'}</p>
         <button style={styles.button} onClick={() => window.location.href = '/'}>
           Back to Home
         </button>
