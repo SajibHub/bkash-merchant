@@ -1,5 +1,4 @@
 import axios from 'axios';
-import globals from 'node-global-storage';
 
 export const bkashToekn = async (req, res, next) => {
   globals.unset('id_token');
