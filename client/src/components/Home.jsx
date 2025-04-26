@@ -17,6 +17,7 @@ const Home = () => {
         { withCredentials: true }
       );
       window.location.href = data.bkashURL;
+      setLoading(false)
     } catch (error) {
       const message = error?.response?.data?.message || error.message || 'Payment failed. Please try again.';
       setError(message);
