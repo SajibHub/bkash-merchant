@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export const bkashToekn = async (req, res, next) => {
-  globals.unset('id_token');
 
   try {
     const { data } = await axios.post(
