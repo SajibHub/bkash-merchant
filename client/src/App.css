@@ -163,8 +163,7 @@ body {
   }
 }
 
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
+
   .container {
     background: -webkit-linear-gradient(135deg, #1e1b4b, #2e1065);
     background: linear-gradient(135deg, #1e1b4b, #2e1065);
@@ -196,7 +195,7 @@ body {
   .input:disabled {
     background: #4b5563;
   }
-}
+
 
 /* Logo */
 .logo {
