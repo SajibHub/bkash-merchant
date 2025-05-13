@@ -211,3 +211,18 @@ body {
     background: #4b5563;
   }
 }
+
+.demo-info {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: white;
+}
+
+.demo-title {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: white;
+}

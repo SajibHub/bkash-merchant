@@ -1,11 +1,20 @@
-import React from 'react';
-import { useSearchParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 const Success = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
   const paymentId = searchParams.get('paymentID');
   const trxId = searchParams.get('trxID');
   const amount = searchParams.get('amount');
+
+  useEffect(() => {
+    if (!paymentId || !trxId || !amount) {
+      // Redirect to home if any parameter is missing
+      navigate('/', { replace: true });
+    }
+  }, [paymentId, trxId, amount, navigate]);
 
   return (
     <div style={styles.container}>
@@ -15,16 +24,16 @@ const Success = () => {
           Thank you for your payment. Your transaction was completed successfully.
         </p>
         <div style={styles.info}>
-          <p><strong>Payment ID:</strong> {paymentId || 'N/A'}</p>
-          <p><strong>Transaction ID:</strong> {trxId || 'N/A'}</p>
-          <p><strong>Amount:</strong> {amount || 'N/A'}</p>
+          <p><strong>Payment ID:</strong> {paymentId}</p>
+          <p><strong>Transaction ID:</strong> {trxId}</p>
+          <p><strong>Amount:</strong> {amount}</p>
         </div>
         <div style={styles.btnCenter}>
           <button
             style={styles.button}
             onMouseEnter={(e) => e.target.style.backgroundColor = '#218838'}
             onMouseLeave={(e) => e.target.style.backgroundColor = '#28a745'}
-            onClick={() => window.location.href = '/'}
+            onClick={() => navigate('/')}
           >
             Back to Home
           </button>
@@ -41,14 +50,14 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    background: 'linear-gradient(135deg, #1e1e1e, #121212)', // Gradient background
+    background: 'linear-gradient(135deg, #1e1e1e, #121212)',
     padding: '20px',
   },
   card: {
-    background: '#222', // Slightly lighter gray for contrast
+    background: '#222',
     padding: '40px',
     borderRadius: '16px',
-    textAlign: 'center', // Center-align text for better readability
+    textAlign: 'center',
     boxShadow: '0 15px 30px rgba(0, 0, 0, 0.6)',
     width: '100%',
     maxWidth: '500px',
@@ -61,7 +70,7 @@ const styles = {
   },
   subtitle: {
     fontSize: '1rem',
-    color: '#ccc', // Softer white for subtitle
+    color: '#ccc',
     marginBottom: '25px',
     lineHeight: '1.5',
   },

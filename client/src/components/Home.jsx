@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from "axios"
+import axios from "axios";
 import '../App.css'; 
 
 const Home = () => {
@@ -17,7 +17,7 @@ const Home = () => {
         { withCredentials: true }
       );
       window.location.href = data.bkashURL;
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
       const message = error?.response?.data?.message || error.message || 'Payment failed. Please try again.';
       setError(message);
@@ -72,6 +72,15 @@ const Home = () => {
             {loading ? 'Processing...' : `Pay ৳${amount}`}
           </button>
         </form>
+
+        {/* Demo Info Section */}
+        <div className="demo-info">
+          <h3 className="demo-title">🔧 Demo Payment Details</h3>
+          <p><strong>✅ Success Number:</strong> 01770618575</p>
+          <p><strong>❌ Failed Number:</strong> 01770618576</p>
+          <p><strong>📲 OTP:</strong> 123456</p>
+          <p><strong>🔐 PIN:</strong> 12121</p>
+        </div>
       </div>
     </div>
   );
